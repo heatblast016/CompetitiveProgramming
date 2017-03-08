@@ -1,8 +1,4 @@
-/*
-ID: adiddee1
-LANG: C++11
-TASK: gift1
-*/
+
 #include <iostream>
 #include <fstream>
 using namespace std;
