@@ -17,7 +17,7 @@ int main()
 	int entries = 0;
 	in >> entries;
 	int max = 0;
-	int changes = 1;
+	int changes = 0;
 	for(int j = 0; j < entries; j++)
 	{
 		int day = 0;
@@ -49,17 +49,24 @@ int main()
 			}
 		} 
 	}
-	for(int f = 0; f < 100; f++)
+	for(int f = 1; f < 100; f++)
 	{	
+		int ischange = 0;
 		int maximum = std::max(production [0] [f], std::max(production [1] [f],production [2] [f]));
 		int maximum2 = std::max(production [0] [f+1], std::max(production [1] [f+1],production [2] [f+1]));
+		int maximum3 = std::max(production [0] [f-1], std::max(production [1] [f-1],production [2] [f-1]));
 		for (int j = 0; j < 3; j++)
 		{
-			if(production[j][f+1] == maximum2 && production[j][f] < maximum)
+			if(production[j][f] == maximum && production[j][f-1] < maximum3)
 			{
-				changes++;
+				ischange = 1;
+			}
+			else if(production[j][f-1] == maximum3 && production[j][f] < maximum)
+			{
+				ischange = 1;
 			}
 		}
+		changes += ischange;
 	}
 	out << changes << endl;
 	return 0;
