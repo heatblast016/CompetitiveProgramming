@@ -57,7 +57,7 @@ int main()
     long long num = 0;
     in >> num;
     in.close();
-    string numbar = to_string(num);
+    string numbar = std::to_string(num);
     int size = numbar.size();
     string st;
     while(dict >> st)

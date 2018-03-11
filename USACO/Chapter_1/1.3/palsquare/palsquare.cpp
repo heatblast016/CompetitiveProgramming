@@ -1,36 +1,37 @@
 /*
 ID: adiddee1
 LANG: C++11
-TASK: namenum
+TASK: palsquare
 */
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <algorithm>
 #include <math.h>
 using namespace std;
 
-string toBase(int base, int number)
-{
-    string final = "";
-    int total = pow(number, 2);
-    int powa = 0;
-    for(powa = 0; pow(base, powa) < total; powa++)
-    {
-    }
-    powa--;
-    for(int i = powa; i >= 0; i--)
-    {
-        if(pow(base, i) <= total)
-        {
-            final.append("1");
-            total -= pow(base, i);
-        }
-        else
-        {
-            final.append("0");
-        }
-    }
-    return final;
+inline char to_char(int c){
+ if(c >= 10) return c - 10 + 'A';
+ return c + '0';
+}
+
+string tobase(int num, int base){
+ string ret;
+ int div = base;
+
+while(div < num){
+  div *= base;
+}
+div /= base;
+ while(true){
+  ret += to_char(num / div);
+  // get remainder
+  num = num % div;
+  // next
+  if(div < 2) break;
+  div /= base;
+ }
+ return ret;
 }
 int main()
 {
@@ -39,20 +40,14 @@ int main()
     int b;
     in >> b;
     in.close();
-    for (int i = 1; i < 301; i++)
+    for (int i = 1; i <= 300; i++)
     {
-        string pal = toBase(b ,pow(i, 2));
-        bool ispal = true;
-        for(int i = 0; i < pal.size(); i++)
+        string pal = tobase(i*i, b);
+        string pal2 = pal;
+        reverse(pal2.begin(), pal2.end());
+        if (pal == pal2)
         {
-            if(pal.at(i) != pal.at(pal.size() - 1 - i))
-            {
-                ispal = false;
-            }
-        }
-        if(ispal == true)
-        {
-            out << i <<" "<< pal << endl;
+            out << tobase(i,b) << " " << pal << endl;
         }
     }
     out.close();
